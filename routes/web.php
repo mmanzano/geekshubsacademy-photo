@@ -19,7 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/photos', function () {
-    $photos = App\Photo::all();
-    return view('photos.index')->with('photos', $photos);
-});
+Route::resource('photos', PhotoController::class);
