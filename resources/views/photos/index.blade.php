@@ -4,25 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                @foreach ($photos as $photo)
-                    <div class="panel panel-default">
-                        <div class="panel-heading clearfix">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    {{ $photo->title }} por {{ $photo->author->name }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="panel-body">
-                            <div class="photo--image">
-                                <img src="{{ $photo->image_url }}" alt="{{ $photo->title }}">
-                            </div>
-                            <div class="photo--body">
-                                {{ $photo->body }}
-                            </div>
-                        </div>
-                    </div>
+                @foreach($photos as $photo)
+                    @include('photos.partials.photo')
                 @endforeach
             </div>
         </div>
