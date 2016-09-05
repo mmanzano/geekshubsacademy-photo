@@ -16,7 +16,7 @@
 
                         <div class="panel-body">
                             <div class="photo--image">
-                                <img src="{{ $photo->image }}" alt="{{ $photo->title }}">
+                                <img src="{{ $photo->image_url }}" alt="{{ $photo->title }}">
                             </div>
                             <div class="photo--body">
                                 {{ $photo->body }}

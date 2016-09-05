@@ -10,6 +10,16 @@ use App\Http\Requests;
 class PhotoController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('show');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -45,18 +55,32 @@ class PhotoController extends Controller
             'body' => 'required'
         ]);
 
-        return "Yo me encargo de guardar todo";
+        $photo = new Photo();
+        $photo->title = $request->input('title');
+        $photo->body = $request->input('body');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = $image->getClientOriginalName();
+            $image->move(public_path('img'), $imageName);
+            $photo->image = $imageName;
+        }
+
+        $photo->author_id = $request->user()->id;
+        $photo->save();
+
+        return $this->redirectToPhoto($photo);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Photo $photo)
     {
-        //
+        return view('photos.show')->with('photo', $photo);
     }
 
     /**
@@ -91,5 +115,10 @@ class PhotoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function redirectToPhoto($photo)
+    {
+        return redirect(route('photos.show', $photo->id));
     }
 }

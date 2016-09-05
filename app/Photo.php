@@ -13,4 +13,14 @@ class Photo extends Model
     {
         return $this->belongsTo(User::class, 'author_id');
     }
+
+    public function getImageUrlAttribute()
+    {
+        if (str_contains($this->image, 'http://lorempixel.com')) {
+            return $this->image;
+        }
+        else {
+            return url('img/' . $this->image);
+        }
+    }
 }
