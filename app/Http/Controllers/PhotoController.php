@@ -39,6 +39,12 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'image' => 'required|file|image',
+            'body' => 'required'
+        ]);
+
         return "Yo me encargo de guardar todo";
     }
 
