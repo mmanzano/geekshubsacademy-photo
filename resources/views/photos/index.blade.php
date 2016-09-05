@@ -9,7 +9,7 @@
                         <div class="panel-heading clearfix">
                             <div class="row">
                                 <div class="col-md-12">
-                                    {{ $photo->title }} por {{ $photo->author_id }}
+                                    {{ $photo->title }} por {{ $photo->author->name }}
                                 </div>
                             </div>
                         </div>
