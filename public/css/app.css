@@ -5766,4 +5766,7 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+.photo--image img {
+  width: 100%; }
+
 /*# sourceMappingURL=app.css.map */
