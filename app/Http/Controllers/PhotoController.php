@@ -28,7 +28,7 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        //
+        return view('photos.create');
     }
 
     /**
@@ -39,7 +39,7 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return "Yo me encargo de guardar todo";
     }
 
     /**
