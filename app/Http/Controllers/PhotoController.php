@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 use App\Http\Requests;
 
@@ -117,12 +118,18 @@ class PhotoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Photo $photo
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Photo $photo)
     {
-        //
+        $this->authorize('destroy', $photo);
+
+        File::delete(public_path('img/' . $photo->image));
+
+        $photo->delete();
+
+        return redirect(route('photos.index'));
     }
 
     private function redirectToPhoto($photo)

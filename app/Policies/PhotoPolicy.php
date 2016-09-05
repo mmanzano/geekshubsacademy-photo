@@ -43,4 +43,16 @@ class PhotoPolicy
     {
         return $user->id === $photo->author_id;
     }
+
+    /**
+     * Determine if the given photo can be destroy by the user.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Photo  $photo
+     * @return bool
+     */
+    public function destroy(User $user, Photo $photo)
+    {
+        return $user->id === $photo->author_id;
+    }
 }
