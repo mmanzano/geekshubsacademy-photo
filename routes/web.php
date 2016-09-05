@@ -15,6 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('hola/{name?}', function ($name = 'miguel') {
-    return 'Hola ' . ucfirst($name);
-});
+Route::get('hola/{name?}', 'GreetingController@hi');
