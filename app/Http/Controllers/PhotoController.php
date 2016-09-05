@@ -55,9 +55,7 @@ class PhotoController extends Controller
             'body' => 'required'
         ]);
 
-        $photo = new Photo();
-        $photo->title = $request->input('title');
-        $photo->body = $request->input('body');
+        $photo = new Photo($request->all());
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -66,8 +64,7 @@ class PhotoController extends Controller
             $photo->image = $imageName;
         }
 
-        $photo->author_id = $request->user()->id;
-        $photo->save();
+        request()->user()->photos()->save($photo);
 
         return $this->redirectToPhoto($photo);
     }
