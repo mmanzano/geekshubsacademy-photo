@@ -83,24 +83,35 @@ class PhotoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Photo $photo)
     {
-        //
+        $this->authorize('edit', $photo);
+
+        return view('photos.edit')->with('photo', $photo);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  Photo $photo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Photo $photo)
     {
-        //
+        $this->authorize('update', $photo);
+
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'body' => 'required'
+        ]);
+
+        $photo->update($request->all());
+
+        return $this->redirectToPhoto($photo);
     }
 
     /**
