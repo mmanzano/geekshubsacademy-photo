@@ -20,4 +20,22 @@ class UsersController extends Controller
             'photos' => $photos
         ]);
     }
+
+    public function addFriend(Request $request, $name)
+    {
+        $friend = User::where('name', $name)->first();
+
+        request()->user()->addFriend($friend);
+
+        return back();
+    }
+
+    public function deleteFriend(Request $request, $name)
+    {
+        $friend = User::where('name', $name)->first();
+
+        request()->user()->deleteFriend($friend);
+
+        return back();
+    }
 }

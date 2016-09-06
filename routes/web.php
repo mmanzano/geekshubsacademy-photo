@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index');
 Route::resource('photos', PhotoController::class);
 
 Route::get('/{name}', 'UsersController@name');
+Route::post('/{name}/friend', ['as' => 'friends', 'uses' => 'UsersController@addFriend']);
+Route::delete('/{name}/friend', ['as' => 'friends', 'uses' => 'UsersController@deleteFriend']);
