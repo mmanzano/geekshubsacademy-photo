@@ -99,6 +99,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'name' => [
+            'username' => 'The :attribute may only contain letters, numbers, and dashes without spaces.'
+        ]
     ],
 
     /*
